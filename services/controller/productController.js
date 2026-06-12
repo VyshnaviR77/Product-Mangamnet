@@ -50,7 +50,7 @@ exports.createProduct = async (req, res) => {
 
 exports.getProducts = async (req, res) => {
   try {
-    const search = req.query.search || "";
+const search = req.query.search ? req.query.search.trim() : "";
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 10;
 
