@@ -31,7 +31,10 @@ router.post('/createproduct',jwtMiddleware,multerConfig.array('image', 3),produc
 router.get('/getproducts', productController.getProducts)
 router.get("/product/:id", productController.getSingleProduct);
 router.put("/product/:id",jwtMiddleware,multerConfig.array("image"), productController.updateProduct);
-router.get("/products",productController.getAllProductsController);
+
+// router.get("/products",productController.getAllProductsController);
+
+
 
 router.post("/wishlist",jwtMiddleware,wishlistController.addToWishlist)
 

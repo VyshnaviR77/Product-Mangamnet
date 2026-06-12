@@ -14,6 +14,9 @@ productserver.use("/uploads",express.static('./uploads'))
 productserver.use(router)
 
 const PORT=process.env.PORT||5000
+productserver.get("/", (req, res) => {
+    res.send("Product Management API is running ");
+});
 productserver.listen(PORT,()=>{
     console.log(`server running at ${PORT}`);
     

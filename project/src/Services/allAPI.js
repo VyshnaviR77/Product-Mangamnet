@@ -17,7 +17,6 @@ export const getPublicCategoriesAPI = async () => {
   );
 };
 
-// PUBLIC SUBCATEGORY API
 export const getPublicSubCategoriesAPI = async () => {
   return await commanAPI(
     "GET",
