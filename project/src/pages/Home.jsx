@@ -39,6 +39,18 @@ function Home() {
     console.log(subcategory);
     const [getsub, setgetsub] = useState([])
 
+
+const toggleHeart = (productId) => {
+  setLikedProducts((prev) =>
+    prev.includes(productId)
+      ? prev.filter((id) => id !== productId)
+      : [...prev, productId]
+  );
+
+  handleHeartClick(productId);
+};
+
+
     // product
     const [product, setProduct] = useState({
         productName: "",
@@ -430,35 +442,58 @@ function Home() {
                                 </button>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                {finalProducts.map((product) => (
-                                    <div onClick={() => navigate(`/product/${product._id}`)}
-                                        key={product._id}
-                                        className="bg-white shadow rounded-lg p-4 cursor-pointer"
-                                    >
-                                        <img
-                                            src={`${SERVER_URL}/uploads/${product.image[0]}`}
-                                            alt=""
-                                            className="w-full h-48 object-cover rounded"
-                                        />
+                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  {finalProducts.map((product) => (
+    <div
+      onClick={() => navigate(`/product/${product._id}`)}
+      key={product._id}
+      className="bg-white shadow rounded-lg p-4 cursor-pointer relative"
+    >
+     
+      <button
+  onClick={(e) => {
+    e.stopPropagation();
+    toggleHeart(product._id);
+  }}
+  className="absolute top-3 right-3"
+>
+  <Heart
+    size={20}
+    fill={
+      likedProducts.includes(product._id)
+        ? "red"
+        : "none"
+    }
+    className={
+      likedProducts.includes(product._id)
+        ? "text-red-500"
+        : "text-gray-400"
+    }
+  />
+</button>
+      <img
+        src={`${SERVER_URL}/uploads/${product.image[0]}`}
+        alt=""
+        className="w-full h-48 object-cover rounded"
+      />
 
-                                        <h3 className="font-semibold mt-3">
-                                            {product.productName}
-                                        </h3>
-                                        
+      <h3 className="font-semibold mt-3">
+        {product.productName}
+      </h3>
 
-                                        <p className="text-gray-500 text-sm">
-                                            {product.category?.categoryName}
-                                        </p>
+      <p className="text-gray-500 text-sm">
+        {product.category?.categoryName}
+      </p>
 
-                                    <p className="text-[#F4A300] font-bold mt-2">
-  ₹ {product.variants && product.variants.length > 0
-      ? product.variants[0].price
-      : "No Price"}
-</p>
-                                    </div>
-                                ))}
-                            </div>
+      <p className="text-[#F4A300] font-bold mt-2">
+        ₹{" "}
+        {product.variants && product.variants.length > 0
+          ? product.variants[0].price
+          : "No Price"}
+      </p>
+    </div>
+  ))}
+</div>
                             {/* Pagination */}
                             <div className="flex justify-center items-center gap-3 mt-8">
                                 <button
