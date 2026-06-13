@@ -1,5 +1,6 @@
-import SERVER_URL from "./server_url";
+// import SERVER_URL from "./server_url";
 import commanAPI from "./common_api";
+const SERVER_URL = import.meta.env.VITE_API_URL|| "http://localhost:5000";
 
 export const registerAPI = async (reqBody) => {
     return await commanAPI("POST", `${SERVER_URL}/register`, reqBody)
