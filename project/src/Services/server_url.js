@@ -1,4 +1,4 @@
-// const SERVER_URL ="https://product-mangamnet-2.onrender.com"
-// // https://product-mangamnet-1.onrender.com
+const SERVER_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-// export default SERVER_URL
+export default SERVER_URL;
